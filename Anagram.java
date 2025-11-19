@@ -14,7 +14,7 @@ public class Anagram {
 		System.out.println("silent and " + randomAnagram("silent") + " are anagrams.");
 		
 		// Performs a stress test of randomAnagram 
-		String str = "1234567";
+		String str = "what is roy";
 		Boolean pass = true;
 		//// 10 can be changed to much larger values, like 1000
 		for (int i = 0; i < 10; i++) {
@@ -28,7 +28,33 @@ public class Anagram {
 
 	// Returns true if the two given strings are anagrams, false otherwise.
 	public static boolean isAnagram(String str1, String str2) {
-		// Replace the following statement with your code
+
+
+		String s1 = preProcess(str1);
+    	String s2 = preProcess(str2);
+
+		
+	for (int i = 0; i < s1.length(); i++) 
+	{
+        char now = s1.charAt(i);
+        int index = s2.indexOf(now); 
+
+        if (index == -1) 
+			{
+            return false;
+        	} 
+			else 
+			{
+            
+            s2 = s2.substring(0, index) + s2.substring(index + 1);
+        	}
+    }
+		
+	if (s2.isEmpty()) 
+		{
+		return true;
+		}
+
 		return false;
 	}
 	   
@@ -36,14 +62,38 @@ public class Anagram {
 	// to lower-case, and all the other characters are deleted, except for spaces, which are left
 	// as is. For example, the string "What? No way!" becomes "whatnoway"
 	public static String preProcess(String str) {
-		// Replace the following statement with your code
-		return "";
+
+		String a = "";
+		for(int i=0;i<str.length();i++)
+		{
+			if (str.charAt(i)>96 && str.charAt(i)<123) {
+					
+				a= a+ str.charAt(i);
+				
+			}
+			else if (str.charAt(i)>64 && str.charAt(i)<96)
+			{
+				a= a +Character.toLowerCase(str.charAt(i));
+			}
+		}
+		
+		return a;
 	} 
 	   
 	// Returns a random anagram of the given string. The random anagram consists of the same
 	// characters as the given string, re-arranged in a random order. 
 	public static String randomAnagram(String str) {
-		// Replace the following statement with your code
-		return "";
+		str=preProcess(str);
+		String ns="";
+		
+
+		while(str.length()!=0){
+			int randomIndex = (int) (Math.random() * str.length());
+			ns=ns+ str.charAt(randomIndex);
+ 			str = str.substring(0, randomIndex) + str.substring(randomIndex + 1);	
+			
+		}
+		
+		return ns;
 	}
 }
