@@ -83,6 +83,8 @@ public class LoanCalc {
 			else if(endBalance(loan,rate,n,mid)<0)
 			H=mid;
 		}
+		iterationCounter--;
+
 		return (L+H)/2.0;
     }
 }
